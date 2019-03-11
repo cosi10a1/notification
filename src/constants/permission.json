@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "cart_view": {
+      "name": "Xem giỏ hàng"
+    },
+    "store_view": {
+      "name": "Xem thông tin cửa hàng"
+    },
+    "promotion_create": {
+      "name": "Tạo khuyến mãi"
+    },
+    "promotion_view": {
+      "name": "Xem khuyến mãi"
+    },
+    "promotion_edit": {
+      "name": "Chỉnh sửa khuyến mãi"
+    },
+    "promotion_delete": {
+      "name": "Xoá khuyến mãi"
+    },
+    "user_manage": {
+      "name": "Quản lí nhân viên"
+    },
+    "user_view": {
+      "name": "Xem thông tin nhân viên"
+    },
+    "report_view": {
+      "name": "Xem báo cáo"
+    }
+  },
+  "roles": {
+    "store-manager": {
+      "permissions": ["store_view", "user_manage", "user_view", "report_view"]
+    },
+    "cashier": {
+      "permissions": ["cart_view"]
+    },
+    "saleman": {
+      "permissions": []
+    },
+    "promotion-admin": {
+      "permissions": [
+        "promotion_create",
+        "promotion_view",
+        "promotion_edit",
+        "promotion_delete"
+      ]
+    },
+    "admin": {}
+  }
+}

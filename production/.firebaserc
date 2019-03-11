@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "nhan-vien-phong-vu",
+    "test": "nhan-vien-phong-vu-test"
+  }
+}

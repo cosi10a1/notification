@@ -1,0 +1,1 @@
+export const SYNC_PROVIDER = 'SYNC_PROVIDER';

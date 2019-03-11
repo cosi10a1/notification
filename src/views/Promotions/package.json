@@ -1,0 +1,6 @@
+{
+  "name": "Promotions",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Promotions.js"
+}

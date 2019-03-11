@@ -1,0 +1,66 @@
+.default_card {
+  height: 85%;
+  margin-bottom: 1px;
+}
+.default_card .card-header {
+  height: 15%;
+}
+.card .card-body {
+  height: 95%;
+  padding-bottom: 0px;
+}
+.default_card .card-body {
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-top: 1px;
+}
+
+.default_card .card-body > div {
+  height: 100%;
+}
+.default_card .card-body > div > div {
+  /* height: 100% !important; */
+  padding-left: 1px;
+  padding-right: 1px;
+}
+.default_card .card-body > div > div .row {
+  height: 100%;
+}
+.text_total {
+  height: 10% !important;
+  font-size: 1.5rem;
+}
+.chart-wrapper {
+  height: 90% !important;
+}
+.group_chart {
+  height: 90% !important;
+}
+.input_params {
+  height: 10% !important;
+}
+.group_card {
+  height: 100% !important;
+  margin: 0px;
+}
+
+.input_row {
+  margin: 1px;
+  padding-left: 15px;
+}
+.child_card {
+  height: 95%;
+}
+
+.DateRangePicker {
+  margin-right: 10px;
+}
+
+.Select {
+  margin-right: 10px;
+}
+/* .Select-multi-value-wrapper {
+  white-space: nowrap;
+  overflow-y: scroll;
+  width: 250px;
+} */
