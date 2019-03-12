@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
+import { withRouter, Switch, Route, Redirect, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './App.css';
 
@@ -20,6 +22,9 @@ import reviews from './reviews';
 
 import dataProviderFactory from './dataProvider';
 import fakeServerFactory from './fakeServer';
+import { createBrowserHistory } from 'history';
+import { signOut } from './stores/user/actions';
+import { fetchEmployees } from './stores/employees/actions';
 
 const i18nProvider = locale => {
   if (locale === 'fr') {
@@ -62,29 +67,64 @@ class App extends Component {
     }
 
     return (
-      <Admin
-        title=""
-        dataProvider={dataProvider}
-        customReducers={{ theme: themeReducer }}
-        customSagas={sagas}
-        customRoutes={customRoutes}
-        authProvider={authProvider}
-        dashboard={Dashboard}
-        loginPage={Login}
-        appLayout={Layout}
-        menu={Menu}
-        locale="en"
-        i18nProvider={i18nProvider}
-      >
-        <Resource name="customers" {...visitors} />
-        <Resource name="commands" {...orders} options={{ label: 'Orders' }} />
-        <Resource name="invoices" {...invoices} />
-        <Resource name="products" {...products} />
-        <Resource name="categories" {...categories} />
-        <Resource name="reviews" {...reviews} />
-      </Admin>
+      <div className="app">
+        {!this.props.user.check} ? (
+        <OverlayLoader
+          color={'red'} // default is white
+          loader="ScaleLoader" // check below for more loaders
+          text="Loading... Please wait!"
+          active={true}
+          backgroundColor={'black'} // default is black
+          opacity=".4" // default is .9
+        />
+        ) : this.props.user.uid ? (
+        <Admin
+          title=""
+          dataProvider={dataProvider}
+          customReducers={{ theme: themeReducer }}
+          customSagas={sagas}
+          customRoutes={customRoutes}
+          // authProvider={authProvider}
+          dashboard={Dashboard}
+          loginPage={Login}
+          appLayout={Layout}
+          menu={Menu}
+          history={createBrowserHistory()}
+          locale="en"
+          i18nProvider={i18nProvider}
+        >
+          <Resource name="customers" {...visitors} />
+          <Resource name="commands" {...orders} options={{ label: 'Orders' }} />
+          <Resource name="invoices" {...invoices} />
+          <Resource name="products" {...products} />
+          <Resource name="categories" {...categories} />
+          <Resource name="reviews" {...reviews} />
+        </Admin>
+        ) : (
+        <Redirect from="/" to="/login" />
+        )}
+      </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.user,
+  providers: state.providers,
+  shops: state.shops.shops,
+  employees: state.employees
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchEmployees: () => dispatch(fetchEmployees()),
+    signOut: () => dispatch(signOut())
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
