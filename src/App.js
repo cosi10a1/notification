@@ -16,68 +16,63 @@ import products from './products';
 import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
+import { createBrowserHistory } from 'history';
 
 // import dataProviderFactory from './dataProvider';
 // import fakeServerFactory from './fakeServer';
 
-// const i18nProvider = locale => {
-//     if (locale === 'fr') {
-//         return import('./i18n/fr').then(messages => messages.default);
-//     }
+const i18nProvider = locale => {
+  if (locale === 'fr') {
+    return import('./i18n/fr').then(messages => messages.default);
+  }
 
-//     // Always fallback on english
-//     return englishMessages;
-// };
+  // Always fallback on english
+  return englishMessages;
+};
 
 class App extends Component {
-    // state = { dataProvider: null };
+  // state = { dataProvider: null };
 
-    async componentWillMount() {
-        // this.restoreFetch = await fakeServerFactory(
-        //     process.env.REACT_APP_DATA_PROVIDER
-        // );
+  async componentWillMount() {
+    // this.restoreFetch = await fakeServerFactory(
+    //     process.env.REACT_APP_DATA_PROVIDER
+    // );
+    // const dataProvider = await dataProviderFactory(
+    //     process.env.REACT_APP_DATA_PROVIDER
+    // );
+    // this.setState({ dataProvider });
+  }
 
-        // const dataProvider = await dataProviderFactory(
-        //     process.env.REACT_APP_DATA_PROVIDER
-        // );
+  componentWillUnmount() {
+    // this.restoreFetch();
+  }
 
-        // this.setState({ dataProvider });
-    }
-
-    componentWillUnmount() {
-        // this.restoreFetch();
-    }
-
-    render() {
-
-        return (
-            <Admin
-                title=""
-                // dataProvider={dataProvider}
-                // customReducers={{ theme: themeReducer }}
-                // customSagas={sagas}
-                // customRoutes={customRoutes}
-                // authProvider={authProvider}
-                // dashboard={Dashboard}
-                // loginPage={Login}
-                appLayout={Layout}
-                menu={Menu}
-                locale="en"
-                // i18nProvider={i18nProvider}
-            >
-                <Resource name="Notifications" {...visitors} />
-                <Resource
-                    name="commands"
-                    {...orders}
-                    options={{ label: 'Orders' }}
-                />
-                <Resource name="invoices" {...invoices} />
-                <Resource name="products" {...products} />
-                <Resource name="categories" {...categories} />
-                <Resource name="reviews" {...reviews} />
-            </Admin>
-        );
-    }
+  render() {
+    return (
+      <Admin
+        title=""
+        // dataProvider={dataProvider}
+        // customReducers={{ theme: themeReducer }}
+        // customSagas={sagas}
+        // customRoutes={customRoutes}
+        // authProvider={authProvider}
+        // dashboard={Dashboard}
+        // loginPage={Login}
+        history={createBrowserHistory()}
+        appLayout={Layout}
+        menu={Menu}
+        locale="en"
+        i18nProvider={i18nProvider}
+      >
+        <Resource name="Notifications" {...visitors} />
+        <Resource name="commands" {...orders} options={{ label: 'Orders' }} />
+        <Resource name="invoices" {...invoices} />
+        <Resource name="products" {...products} />
+        <Resource name="categories" {...categories} />
+        <Resource name="reviews" {...reviews} />
+      </Admin>
+    );
+  }
 }
 
 export default App;
