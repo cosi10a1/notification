@@ -8,6 +8,7 @@ import { reducer as formReducer } from 'redux-form';
 import reports from './reports/reducer';
 import order from './carts/reducer';
 import permissions from './permissions/reducer';
+import i18n from './i18n/reducer'
 
 // Combines all reducers to a single reducer function
 const reducer = combineReducers({
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   form: formReducer,
   reports,
   order,
-  permissions
+  permissions,
+  i18n
 });
 
 export default reducer;

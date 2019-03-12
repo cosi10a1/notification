@@ -3,12 +3,14 @@ import { Admin, Resource } from 'react-admin';
 
 import './App.css';
 
-// import authProvider from './authProvider';
-// import sagas from './sagas';
-// import themeReducer from './themeReducer';
+import authProvider from './authProvider';
+import sagas from './sagas';
+import themeReducer from './themeReducer';
 import { Login, Layout, Menu } from './layout';
-// import { Dashboard } from './dashboard';
-// import customRoutes from './routes';
+import { Dashboard } from './dashboard';
+import customRoutes from './routes';
+import englishMessages from './i18n/en';
+
 
 import visitors from './visitors';
 import orders from './orders';
@@ -18,13 +20,13 @@ import categories from './categories';
 import reviews from './reviews';
 import { createBrowserHistory } from 'history';
 
-// import dataProviderFactory from './dataProvider';
+import dataProviderFactory from './dataProvider';
 // import fakeServerFactory from './fakeServer';
 
 const i18nProvider = locale => {
-  if (locale === 'fr') {
-    return import('./i18n/fr').then(messages => messages.default);
-  }
+  // if (locale === 'fr') {
+  //   return import('./i18n/fr').then(messages => messages.default);
+  // }
 
   // Always fallback on english
   return englishMessages;
@@ -32,15 +34,20 @@ const i18nProvider = locale => {
 
 class App extends Component {
   // state = { dataProvider: null };
+  constructor(props){
+    super(props);
+    this.state={dataProvider:null};
+  }
 
   async componentWillMount() {
+    const dataProvider = await dataProviderFactory(
+     'rest'
+    );
+    this.setState({ dataProvider });
     // this.restoreFetch = await fakeServerFactory(
-    //     process.env.REACT_APP_DATA_PROVIDER
+    //     'rest'
     // );
-    // const dataProvider = await dataProviderFactory(
-    //     process.env.REACT_APP_DATA_PROVIDER
-    // );
-    // this.setState({ dataProvider });
+
   }
 
   componentWillUnmount() {
@@ -51,13 +58,13 @@ class App extends Component {
     return (
       <Admin
         title=""
-        // dataProvider={dataProvider}
-        // customReducers={{ theme: themeReducer }}
-        // customSagas={sagas}
-        // customRoutes={customRoutes}
-        // authProvider={authProvider}
-        // dashboard={Dashboard}
-        // loginPage={Login}
+        dataProvider={this.state.dataProvider}
+        customReducers={{ theme: themeReducer }}
+        customSagas={sagas}
+        customRoutes={customRoutes}
+        authProvider={authProvider}
+        dashboard={Dashboard}
+        loginPage={Login}
         history={createBrowserHistory()}
         appLayout={Layout}
         menu={Menu}

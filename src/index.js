@@ -27,8 +27,8 @@ import Login from './views/Pages/Login/Login';
 import firebase from 'firebase';
 
 // Actions
-// import { setAuthenticatedUser } from './stores/user/actions';
-// import { syncFirebaseData } from './stores/actions';
+import { setAuthenticatedUser } from './stores/user/actions';
+import { syncFirebaseData } from './stores/actions';
 import { verify_sso, verify_accessToken } from './helpers/verify_sso';
 import * as types from './stores/user/action-types';
 import config from './config';
