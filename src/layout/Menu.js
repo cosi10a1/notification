@@ -20,6 +20,14 @@ import reviews from '../reviews';
 import SubMenu from './SubMenu';
 
 class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuCatalog: false,
+      menuSales: false,
+      menuCustomers: false
+    };
+  }
   handleToggle(menu) {
     this.setState(state => ({ [menu]: !state[menu] }));
   }
