@@ -34,6 +34,7 @@ class Menu extends Component {
 
   render() {
     const { onMenuClick, open, logout, translate } = this.props;
+    console.log("Menu props:",{onMenuClick, open, logout, translate})
     return (
       <div>
         {' '}
@@ -42,22 +43,18 @@ class Menu extends Component {
           handleToggle={() => this.handleToggle('menuSales')}
           isOpen={this.state.menuSales}
           sidebarIsOpen={open}
-          name="pos.menu.sales"
+          name="Sales"
           icon={<orders.icon />}
         >
           <MenuItemLink
             to={`/commands`}
-            primaryText={translate(`resources.commands.name`, {
-              smart_count: 2
-            })}
+            primaryText="Sales"
             leftIcon={<orders.icon />}
             onClick={onMenuClick}
           />
           <MenuItemLink
             to={`/invoices`}
-            primaryText={translate(`resources.invoices.name`, {
-              smart_count: 2
-            })}
+            primaryText="Sales"
             leftIcon={<invoices.icon />}
             onClick={onMenuClick}
           />

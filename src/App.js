@@ -67,43 +67,32 @@ class App extends Component {
     }
 
     return (
-      <div className="app">
-        {!this.props.user.check} ? (
-        <OverlayLoader
-          color={'red'} // default is white
-          loader="ScaleLoader" // check below for more loaders
-          text="Loading... Please wait!"
-          active={true}
-          backgroundColor={'black'} // default is black
-          opacity=".4" // default is .9
-        />
-        ) : this.props.user.uid ? (
         <Admin
-          title=""
-          dataProvider={dataProvider}
-          customReducers={{ theme: themeReducer }}
-          customSagas={sagas}
-          customRoutes={customRoutes}
-          // authProvider={authProvider}
-          dashboard={Dashboard}
-          loginPage={Login}
-          appLayout={Layout}
-          menu={Menu}
-          history={createBrowserHistory()}
-          locale="en"
-          i18nProvider={i18nProvider}
+            title=""
+            // dataProvider={dataProvider}
+            customReducers={{ theme: themeReducer }}
+            customSagas={sagas}
+            customRoutes={customRoutes}
+            // authProvider={authProvider}
+            dashboard={Dashboard}
+            loginPage={Login}
+            appLayout={Layout}
+            menu={Menu}
+            locale="en"
+            i18nProvider={i18nProvider}
+            history = {createBrowserHistory()}
         >
-          <Resource name="customers" {...visitors} />
-          <Resource name="commands" {...orders} options={{ label: 'Orders' }} />
-          <Resource name="invoices" {...invoices} />
-          <Resource name="products" {...products} />
-          <Resource name="categories" {...categories} />
-          <Resource name="reviews" {...reviews} />
+            <Resource name="customers" {...visitors} />
+            <Resource
+                name="commands"
+                {...orders}
+                options={{ label: 'Orders' }}
+            />
+            <Resource name="invoices" {...invoices} />
+            <Resource name="products" {...products} />
+            <Resource name="categories" {...categories} />
+            <Resource name="reviews" {...reviews} />
         </Admin>
-        ) : (
-        <Redirect from="/" to="/login" />
-        )}
-      </div>
     );
   }
 }
