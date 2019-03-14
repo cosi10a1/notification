@@ -1,8 +1,6 @@
 import firebase from 'firebase';
 import * as user_types from './user/action-types';
-import * as provider_types from './providers/action-types';
 import * as shop_types from './shops/action-types';
-import * as promotion_types from './promotions/action-types';
 import * as cart_types from './carts/action-types';
 import * as permissions_types from './permissions/action-types';
 export const syncFirebaseData = uid => {
@@ -16,12 +14,6 @@ export const syncFirebaseData = uid => {
           type: user_types.SYNC_USER_INFORMATION,
           info
         });
-
-        syncProviderFromFirebase(
-          dispatch,
-          getState().providers,
-          info.providers
-        );
 
         dispatch(syncPermissionsFromFirebase());
 
@@ -56,26 +48,6 @@ const syncAllShopsfromFirebase = dispatch => {
     });
 };
 
-const syncProviderFromFirebase = (dispatch, state_providers, providers) => {
-  if (providers && providers.length > 0) {
-    providers.forEach(provider => {
-      if (!state_providers[provider]) {
-        firebase
-          .database()
-          .ref('providers/' + provider)
-          .on('value', snapshot => {
-            let data = snapshot.val() ? snapshot.val() : {};
-            dispatch({
-              type: provider_types.SYNC_PROVIDER,
-              id: provider,
-              data
-            });
-          });
-      }
-    });
-  }
-};
-
 const syncShopsFromFirebase = (dispatch, state_shops, shops) => {
   if (shops && shops.length > 0) {
     shops.forEach(shop => {
@@ -94,25 +66,6 @@ const syncShopsFromFirebase = (dispatch, state_shops, shops) => {
       }
     });
   }
-};
-
-const syncPromotionsFromFirebase = (dispatch, state_promotions, promotions) => {
-  if (promotions && promotions.length > 0)
-    promotions.forEach(promotion => {
-      if (!state_shops[promotion]) {
-        firebase
-          .database()
-          .ref('shops/' + promotion)
-          .on('value', snapshot => {
-            let data = snapshot.val() ? snapshot.val() : {};
-            dispatch({
-              type: promotion_types.SYNC_FIREBASE_PROMOTIONS_DONE,
-              promotion_id: promotion,
-              data
-            });
-          });
-      }
-    });
 };
 
 export const syncCartsFromFirebase = () => {
