@@ -6,19 +6,13 @@ import { connect } from 'react-redux';
 import './App.css';
 
 import authProvider from './authProvider';
-import sagas from './sagas';
 import themeReducer from './themeReducer';
 import { Login, Layout, Menu } from './layout';
 import { Dashboard } from './dashboard';
 import customRoutes from './routes';
 import englishMessages from './i18n/en';
 
-import visitors from './visitors';
-import orders from './orders';
-import products from './products';
-import invoices from './invoices';
-import categories from './categories';
-import reviews from './reviews';
+import notifications from './notifications';
 
 import dataProviderFactory from './dataProvider';
 import fakeServerFactory from './fakeServer';
@@ -67,32 +61,22 @@ class App extends Component {
     }
 
     return (
-        <Admin
-            title=""
-            // dataProvider={dataProvider}
-            customReducers={{ theme: themeReducer }}
-            customSagas={sagas}
-            customRoutes={customRoutes}
-            // authProvider={authProvider}
-            dashboard={Dashboard}
-            loginPage={Login}
-            appLayout={Layout}
-            menu={Menu}
-            locale="en"
-            i18nProvider={i18nProvider}
-            history = {createBrowserHistory()}
-        >
-            <Resource name="customers" {...visitors} />
-            <Resource
-                name="commands"
-                {...orders}
-                options={{ label: 'Orders' }}
-            />
-            <Resource name="invoices" {...invoices} />
-            <Resource name="products" {...products} />
-            <Resource name="categories" {...categories} />
-            <Resource name="reviews" {...reviews} />
-        </Admin>
+      <Admin
+        title=""
+        dataProvider={dataProvider}
+        customReducers={{ theme: themeReducer }}
+        customRoutes={customRoutes}
+        // authProvider={authProvider}
+        dashboard={Dashboard}
+        loginPage={Login}
+        appLayout={Layout}
+        menu={Menu}
+        locale="en"
+        i18nProvider={i18nProvider}
+        history={createBrowserHistory()}
+      >
+        <Resource name="notifications" {...notifications} />
+      </Admin>
     );
   }
 }

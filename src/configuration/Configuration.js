@@ -9,40 +9,40 @@ import compose from 'recompose/compose';
 import { changeTheme } from './actions';
 
 const styles = {
-    label: { width: '10em', display: 'inline-block' },
-    button: { margin: '1em' },
+  label: { width: '10em', display: 'inline-block' },
+  button: { margin: '1em' }
 };
 
 const Configuration = ({
-    classes,
-    theme,
-    locale,
-    changeTheme,
-    changeLocale,
-    translate,
+  classes,
+  theme,
+  locale,
+  changeTheme,
+  changeLocale,
+  translate
 }) => (
-    <Card>
-        <Title title={translate('pos.configuration')} />
-        <CardContent>
-            <div className={classes.label}>{translate('pos.theme.name')}</div>
-            <Button
-                variant="raised"
-                className={classes.button}
-                color={theme === 'light' ? 'primary' : 'default'}
-                onClick={() => changeTheme('light')}
-            >
-                {translate('pos.theme.light')}
-            </Button>
-            <Button
-                variant="raised"
-                className={classes.button}
-                color={theme === 'dark' ? 'primary' : 'default'}
-                onClick={() => changeTheme('dark')}
-            >
-                {translate('pos.theme.dark')}
-            </Button>
-        </CardContent>
-        <CardContent>
+  <Card>
+    <Title title="Cài đặt" />
+    <CardContent>
+      <div className={classes.label}>{'Theme'}</div>
+      <Button
+        variant="raised"
+        className={classes.button}
+        color={theme === 'light' ? 'primary' : 'default'}
+        onClick={() => changeTheme('light')}
+      >
+        {'Light'}
+      </Button>
+      <Button
+        variant="raised"
+        className={classes.button}
+        color={theme === 'Dark' ? 'primary' : 'default'}
+        onClick={() => changeTheme('dark')}
+      >
+        {'Dark'}
+      </Button>
+    </CardContent>
+    {/* <CardContent>
             <div className={classes.label}>{translate('pos.language')}</div>
             <Button
                 variant="raised"
@@ -60,25 +60,25 @@ const Configuration = ({
             >
                 fr
             </Button>
-        </CardContent>
-    </Card>
+        </CardContent> */}
+  </Card>
 );
 
 const mapStateToProps = state => ({
-    theme: state.theme,
-    locale: state.i18n.locale,
+  theme: state.theme,
+  locale: state.i18n.locale
 });
 
 const enhance = compose(
-    connect(
-        mapStateToProps,
-        {
-            changeLocale,
-            changeTheme,
-        }
-    ),
-    translate,
-    withStyles(styles)
+  connect(
+    mapStateToProps,
+    {
+      changeLocale,
+      changeTheme
+    }
+  ),
+  translate,
+  withStyles(styles)
 );
 
 export default enhance(Configuration);

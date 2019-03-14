@@ -11,22 +11,13 @@ import {
   Responsive
 } from 'react-admin';
 
-import visitors from '../visitors';
-import orders from '../orders';
-import invoices from '../invoices';
-import products from '../products';
-import categories from '../categories';
-import reviews from '../reviews';
+import notifications from '../notifications';
 import SubMenu from './SubMenu';
 
 class Menu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      menuCatalog: false,
-      menuSales: false,
-      menuCustomers: false
-    };
+    this.state = {};
   }
   handleToggle(menu) {
     this.setState(state => ({ [menu]: !state[menu] }));
@@ -34,92 +25,22 @@ class Menu extends Component {
 
   render() {
     const { onMenuClick, open, logout, translate } = this.props;
-    console.log("Menu props:",{onMenuClick, open, logout, translate})
+    console.log('Menu props:', { onMenuClick, open, logout, translate });
     return (
       <div>
         {' '}
         <DashboardMenuItem onClick={onMenuClick} />
-        <SubMenu
-          handleToggle={() => this.handleToggle('menuSales')}
-          isOpen={this.state.menuSales}
-          sidebarIsOpen={open}
-          name="Sales"
-          icon={<orders.icon />}
-        >
-          <MenuItemLink
-            to={`/commands`}
-            primaryText="Sales"
-            leftIcon={<orders.icon />}
-            onClick={onMenuClick}
-          />
-          <MenuItemLink
-            to={`/invoices`}
-            primaryText="Sales"
-            leftIcon={<invoices.icon />}
-            onClick={onMenuClick}
-          />
-        </SubMenu>
-        <SubMenu
-          handleToggle={() => this.handleToggle('menuCatalog')}
-          isOpen={this.state.menuCatalog}
-          sidebarIsOpen={open}
-          name="pos.menu.catalog"
-          icon={<products.icon />}
-        >
-          <MenuItemLink
-            to={`/products`}
-            primaryText={translate(`resources.products.name`, {
-              smart_count: 2
-            })}
-            leftIcon={<products.icon />}
-            onClick={onMenuClick}
-          />
-          <MenuItemLink
-            to={`/categories`}
-            primaryText={translate(`resources.categories.name`, {
-              smart_count: 2
-            })}
-            leftIcon={<categories.icon />}
-            onClick={onMenuClick}
-          />
-        </SubMenu>
-        <SubMenu
-          handleToggle={() => this.handleToggle('menuCustomer')}
-          isOpen={this.state.menuCustomer}
-          sidebarIsOpen={open}
-          name="pos.menu.customers"
-          icon={<visitors.icon />}
-        >
-          <MenuItemLink
-            to={`/customers`}
-            primaryText={translate(`resources.customers.name`, {
-              smart_count: 2
-            })}
-            leftIcon={<visitors.icon />}
-            onClick={onMenuClick}
-          />
-          <MenuItemLink
-            to={`/segments`}
-            primaryText={translate(`resources.segments.name`, {
-              smart_count: 2
-            })}
-            leftIcon={<LabelIcon />}
-            onClick={onMenuClick}
-          />
-        </SubMenu>
         <MenuItemLink
-          to={`/reviews`}
-          primaryText={translate(`resources.reviews.name`, {
-            smart_count: 2
-          })}
-          leftIcon={<reviews.icon />}
-          onClick={onMenuClick}
+          to={`/notifications`}
+          sidebarIsOpen={open}
+          primaryText="Notify"
+          leftIcon={<notifications.icon />}
         />
         <Responsive
           xsmall={
             <MenuItemLink
               to="/configuration"
-              primaryText={translate('pos.configuration')}
+              primaryText="Cài đặt"
               leftIcon={<SettingsIcon />}
               onClick={onMenuClick}
             />

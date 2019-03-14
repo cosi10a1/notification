@@ -58,11 +58,6 @@ class Login extends Component {
   componentWillMount() {}
 
   render() {
-    console.log("Fi")
-    var i=0;
-    if(i==0){
-      console.log("Fi")
-    }
     if (!this.props.user.check) {
       return (
         <OverlayLoader
