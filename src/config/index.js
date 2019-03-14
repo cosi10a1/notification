@@ -7,7 +7,8 @@ export default {
     sso: "acc.teko.vn",
     offlinesales: "test.offlinesales.teksvr.com",
     magento: "moon.tekshop.vn",
-    asia: "dev.pvis.teko.vn"
+    asia: "dev.pvis.teko.vn",
+    stn:  "test.stn.teksvr.com"
   },
   firebase_config: {
     "apiKey": "AIzaSyBsRGTzAE6Fwt6zuD8xI5HQH2AXSR4WFXI",

@@ -28,7 +28,10 @@ const styles = {
   nb_commands: { color: 'purple' }
 };
 
-const NotificationList = ({ classes, ...props }) => (
+const NotificationList = ({ classes, ...props }) => {
+  console.log("NotificationList:",props)
+  return (
+  
   <List
     {...props}
     filters={<NotificationFilter />}
@@ -38,10 +41,10 @@ const NotificationList = ({ classes, ...props }) => (
     <Responsive
       medium={
         <Datagrid>
-          <StringField source="app_id" label="notification.app_id" />
-          <DateField source="created_at" label="notification.created_at" />
-          <StringField source="message" label="notification.message" />
-          <NumberField source="received_id" label="notification.received_id" />
+          <StringField source="app_id" label="AppID" />
+          <DateField source="created_at" label="Ngày tạo" />
+          <StringField source="message" label="Thông báo" />
+          <NumberField source="received_id" label="Người nhận" />
           <StringField source="title" label="notification.title" />
           <BooleanField source="is_read" label="notification.is_read" />
           <DateField source="updated_at" label="notification.updated_at" />
@@ -50,6 +53,7 @@ const NotificationList = ({ classes, ...props }) => (
       }
     />
   </List>
-);
+)
+    };
 
 export default withStyles(styles)(NotificationList);

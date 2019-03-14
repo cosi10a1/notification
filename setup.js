@@ -76,6 +76,18 @@ let HOSTS = {
     qc: 'test.pvis.teko.vn',
     staging: 'staging.pvis.teko.vn',
     production: 'pvis.teko.vn'
+  },
+  asia: {
+    dev: 'dev.pvis.teko.vn',
+    qc: 'test.pvis.teko.vn',
+    staging: 'staging.pvis.teko.vn',
+    production: 'pvis.teko.vn'
+  },
+  stn: {
+    dev: 'test.stn.teko.vn',
+    qc: 'test.stn.teko.vn',
+    staging: 'test.stn.teko.vn',
+    production: 'stn.teko.vn'
   }
 };
 

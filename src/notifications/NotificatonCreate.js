@@ -1,21 +1,26 @@
 import React from 'react';
 import {
   Create,
-  DateInput,
   FormTab,
   LongTextInput,
   TabbedForm,
-  TextInput
+  TextInput,
+  SelectInput,
+  Toolbar,
+  SelectArrayInput
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import RichTextInput from 'ra-input-rich-text';
+import NotificationCreateToolbar from './NotificationCreateToolBar'
+
 export const styles = {
-  first_name: { display: 'inline-block' },
-  last_name: { display: 'inline-block', marginLeft: 32 },
-  email: { width: 544 },
-  address: { maxWidth: 544 },
-  zipcode: { display: 'inline-block' },
-  city: { display: 'inline-block', marginLeft: 32 },
+  title: {width: 544 },
+  message: { width: 544 },
+
+  sender: {  display: 'inline-block' },
+  sender_id: { display: 'inline-block' , marginLeft: 32 },
+  link: { width: 544 },
   comment: {
     maxWidth: '20em',
     overflow: 'hidden',
@@ -24,29 +29,43 @@ export const styles = {
   }
 };
 
+
+
 const NotificatonCreate = ({ classes, ...props }) => (
-  <Create {...props}>
-    <TabbedForm>
-      <FormTab label="resources.customers.tabs.identity">
+  <Create {...props} >
+    <TabbedForm toolbar ={<NotificationCreateToolbar />}>
+      <FormTab label="Thông báo">
         <TextInput
           autoFocus
-          source="first_name"
-          formClassName={classes.first_name}
+          label ="Tiêu đề"
+          source="title"
+          formClassName={classes.title}
         />
-        <TextInput source="last_name" formClassName={classes.last_name} />
-        <TextInput
-          type="email"
-          source="email"
-          validation={{ email: true }}
+        <RichTextInput
+          label ="Nội dung"
+          source="message"
           fullWidth={true}
-          formClassName={classes.email}
+          formClassName={classes.message}
         />
-        <DateInput source="birthday" />
+        <SelectArrayInput label="Nhóm người dùng" source="groups" choices={[
+            { id: 'GCAFE', name: 'Đại lý Gcafe' },
+            { id: 'DAI_LY_NGOAI', name: 'Đại lý ngoài' },
+            { id: 'CHU_PHONG_MAY', name: 'Chủ phòng máy' },
+            { id: 'VNPOST', name: 'VNPOST' }
+         ]} 
+        />
       </FormTab>
-      <FormTab label="resources.customers.tabs.address" path="address">
-        <LongTextInput source="address" formClassName={classes.address} />
-        <TextInput source="zipcode" formClassName={classes.zipcode} />
-        <TextInput source="city" formClassName={classes.city} />
+      <FormTab label="Cấu hình thông báo" >
+        <TextInput label ="Sender"  source="sender" formClassName={classes.sender} defaultValue='offline_sales' />
+        <TextInput label ="Sender_ID" source="sender_id" formClassName={classes.sender_id} defaultValue='offline_sales'/>
+        <LongTextInput source="link" formClassName={classes.link} />
+        <SelectInput label="Gửi tới app" source="app_id" choices={[
+            { id: 'dailymoi', name: 'App Đại lý mới' },
+            { id: 'daily', name: 'App Đại lý' },
+            { id: 'nhanvien', name: 'App Nhân viên' },
+         ]} 
+         defaultValue="dailymoi"
+        />
       </FormTab>
     </TabbedForm>
   </Create>
