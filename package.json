@@ -57,6 +57,7 @@
     "xlsx": "^0.12.8"
   },
   "dependencies": {
+    "admin-on-rest": "1.4.1",
     "@material-ui/core": "~1.4.0",
     "@material-ui/icons": "~1.1.0",
     "babel-preset-env": "^1.6.1",

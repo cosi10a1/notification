@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    this.restoreFetch = await fakeServerFactory('rest');
+    // this.restoreFetch = await fakeServerFactory('rest');
 
     const dataProvider = await dataProviderFactory('rest');
 
@@ -46,7 +46,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.restoreFetch();
+    // this.restoreFetch();
   }
 
   render() {
@@ -61,22 +61,32 @@ class App extends Component {
     }
 
     return (
-      <Admin
-        title=""
-        dataProvider={dataProvider}
-        customReducers={{ theme: themeReducer }}
-        customRoutes={customRoutes}
-        // authProvider={authProvider}
-        dashboard={Dashboard}
-        loginPage={Login}
-        appLayout={Layout}
-        menu={Menu}
-        locale="en"
-        i18nProvider={i18nProvider}
-        history={createBrowserHistory()}
-      >
-        <Resource name="notifications" {...notifications} />
-      </Admin>
+      <div className="app">
+        {!this.props.user.check ? (
+          <div className="loader-container">
+            <div className="loader">Loading...</div>
+          </div>
+        ) : this.props.user.uid ? (
+          <Admin
+            title=""
+            // dataProvider={dataProvider}
+            customReducers={{ theme: themeReducer }}
+            customRoutes={customRoutes}
+            authProvider={authProvider}
+            dashboard={Dashboard}
+            loginPage={Login}
+            appLayout={Layout}
+            menu={Menu}
+            locale="en"
+            i18nProvider={i18nProvider}
+            history={createBrowserHistory()}
+          >
+            <Resource name="notifications" {...notifications} />
+          </Admin>
+        ) : (
+          <Redirect from="/" to="/login" />
+        )}
+      </div>
     );
   }
 }
