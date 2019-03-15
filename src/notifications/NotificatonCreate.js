@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {
   Create,
   FormTab,
@@ -7,12 +7,16 @@ import {
   TextInput,
   SelectInput,
   Toolbar,
+  GET_LIST,
   SelectArrayInput
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { connect } from 'react-redux';
+import { withRouter, Switch, Route, Redirect, NavLink } from 'react-router-dom';
 
 import RichTextInput from 'ra-input-rich-text';
 import NotificationCreateToolbar from './NotificationCreateToolBar'
+import dataProvider from '../dataProvider/rest';
 
 export const styles = {
   title: {width: 544 },
@@ -31,8 +35,26 @@ export const styles = {
 
 
 
-const NotificatonCreate = ({ classes, ...props }) => (
-  <Create {...props} >
+class NotificatonCreate extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      groups:[]
+    }
+
+  }
+
+  componentDidMount(){
+    dataProvider(GET_LIST,"permission_groups",{})
+    .then(result=>{
+      console.log("GETLIST result",result)
+    })
+  }
+
+  render(){
+  let classes = this.props.classes
+  return(
+  <Create {...this.props} >
     <TabbedForm toolbar ={<NotificationCreateToolbar />}>
       <FormTab label="Thông báo">
         <TextInput
@@ -69,6 +91,22 @@ const NotificatonCreate = ({ classes, ...props }) => (
       </FormTab>
     </TabbedForm>
   </Create>
-);
+  )
+  }
 
-export default withStyles(styles)(NotificatonCreate);
+        }
+const mapStateToProps = state => ({
+  user: state.use
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchEmployees: () => dispatch(fetchEmployees()),
+    signOut: () => dispatch(signOut())
+  };
+};
+        
+
+export default withStyles(styles)(withRouter(
+  connect(null, null)(NotificatonCreate)
+));

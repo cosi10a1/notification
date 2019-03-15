@@ -82,8 +82,9 @@ export default (type, resource, params) =>
       case 'permission_groups':
         switch (type) {
           case GET_LIST:
+            console.log("permission_groups")
             resolve(
-              offlinesalesProvider(GET_LIST, '/api/v2.1/permission_groups/', {})
+              offlinesalesProvider(GET_LIST, 'api/v2.1/permission_groups/', { pagination: { page: 0 , perPage: 0 }, sort: { field: '', order: '' }, filter: {} })
             );
           default:
             setTimeout(
