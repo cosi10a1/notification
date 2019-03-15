@@ -5,24 +5,40 @@ import { fetchUtils } from 'react-admin';
 import config from '../config';
 import { GET_LIST, CREATE } from 'ra-core';
 import cookie from 'react-cookies';
+import Base64 from 'base-64';
+
 
 const buildToken = (tokenType, token) => {
   return tokenType + ' ' + token;
 };
 
 const buildClient = tokenType => (url, options = {}) => {
-  token = cookie.load('_uat');
+  let token = cookie.load('_uat');
   options.user = {
     authenticated: true,
     token: buildToken(tokenType, Base64.encode(token + ':' + ''))
   };
-  options.headers = new Headers({ Accept: 'application/json' });
+  options.headers = new Headers({ Accept: 'application/json'});
   return fetchUtils.fetchJson(url, options);
 };
 
+const buildTekoUatClient=() =>(url,options={}) =>{
+  let token = cookie.load('_uat');
+  options.user = {
+    authenticated: true,
+  };
+  options.headers = new Headers({ Accept: 'application/json', 'teko-uat':token });
+  return fetchUtils.fetchJson(url, options);
+}
+
 const notificationProvider = simpleRestProvider(
-  'http://' + config.hosts.stn,
+  'http://' + config.hosts.offlinesales,
   buildClient('Basic')
+);
+
+const viewNotificationProvider = simpleRestProvider(
+  'http://' + config.hosts.stn,
+  buildTekoUatClient()
 );
 
 const offlinesalesProvider = simpleRestProvider(
@@ -43,6 +59,18 @@ export default (type, resource, params) =>
               notificationProvider(CREATE, 'api/v2.1/users/notify/', {
                 x: 'y',
                 y: 'z'
+              }).then(result=>{
+                console.log("Create success")
+              })
+            );
+          case GET_LIST:
+            console.log('params', params);
+            resolve(
+              viewNotificationProvider(GET_LIST, 'api/notifications', {
+                app_id: 'nhanvien',
+                limit: 10
+              }).then(result=>{
+                console.log("Get result:", result)
               })
             );
           default:

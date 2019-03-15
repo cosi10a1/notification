@@ -17,7 +17,7 @@ import '../scss/style.scss';
 import '../scss/core/_dropdown-menu-right.scss';
 
 // Redux
-import store from './stores/configureStore';
+import configureStore from './stores/configureStore';
 
 // Containers
 import App from './App';
@@ -32,7 +32,28 @@ import { syncFirebaseData } from './stores/actions';
 import { verify_sso, verify_accessToken } from './helpers/verify_sso';
 import * as types from './stores/user/action-types';
 import config from './config';
+import createHistory from 'history/createHashHistory';
+import dataProviderFactory from './dataProvider';
+import authProvider from './authProvider';
+import restProvider from 'ra-data-simple-rest';
+import { resolve } from 'q';
+
+
+
 // import * as admin from 'firebase-admin';
+// const dataProvider = restProvider('http://path.to.my.api/');
+
+
+const history = createHistory();
+const i18nProvider = locale => {
+  if (locale === 'fr') {
+    return import('./i18n/fr').then(messages => messages.default);
+  }
+
+  // Always fallback on english
+  return englishMessages;
+};
+
 
 class Root extends Component {
   constructor(props) {
@@ -68,7 +89,7 @@ class Root extends Component {
       <BrowserRouter basename={'#'}>
         <Switch>
           <Route exact path="/login" name="Login Page" component={Login} />
-          <Route path="/" name="Home" component={App} />
+          <Route path="/" name="Home" render={(props)=><App {...props} history={history}/>}  />
         </Switch>
       </BrowserRouter>
     );
@@ -78,7 +99,7 @@ class Root extends Component {
 const RootWithState = connect()(Root);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={configureStore(() => Promise.resolve(),dataProviderFactory('rest'),i18nProvider, history,)}>
     <RootWithState />
   </Provider>,
   document.getElementById('root')

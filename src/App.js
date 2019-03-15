@@ -16,9 +16,9 @@ import notifications from './notifications';
 
 import dataProviderFactory from './dataProvider';
 import fakeServerFactory from './fakeServer';
-import { createBrowserHistory } from 'history';
 import { signOut } from './stores/user/actions';
 import { fetchEmployees } from './stores/employees/actions';
+import Logout from './layout/Logout';
 
 const i18nProvider = locale => {
   if (locale === 'fr') {
@@ -29,20 +29,22 @@ const i18nProvider = locale => {
   return englishMessages;
 };
 
+
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataProvider: null
+      // dataProvider: null
     };
   }
 
   async componentWillMount() {
     // this.restoreFetch = await fakeServerFactory('rest');
 
-    const dataProvider = await dataProviderFactory('rest');
+    // const dataProvider = await dataProviderFactory('rest');
 
-    this.setState({ dataProvider });
+    // this.setState({ dataProvider });
   }
 
   componentWillUnmount() {
@@ -50,15 +52,15 @@ class App extends Component {
   }
 
   render() {
-    const { dataProvider } = this.state;
+    // const { dataProvider } = this.state;
 
-    if (!dataProvider) {
-      return (
-        <div className="loader-container">
-          <div className="loader">Loading...</div>
-        </div>
-      );
-    }
+    // if (!dataProvider) {
+    //   return (
+    //     <div className="loader-container">
+    //       <div className="loader">Loading...</div>
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className="app">
@@ -72,14 +74,15 @@ class App extends Component {
             // dataProvider={dataProvider}
             customReducers={{ theme: themeReducer }}
             customRoutes={customRoutes}
-            authProvider={authProvider}
+            authProvider={() => Promise.resolve()}
             dashboard={Dashboard}
             loginPage={Login}
             appLayout={Layout}
+            logoutButton={Logout}
             menu={Menu}
             locale="en"
             i18nProvider={i18nProvider}
-            history={createBrowserHistory()}
+            history={this.props.history}
           >
             <Resource name="notifications" {...notifications} />
           </Admin>

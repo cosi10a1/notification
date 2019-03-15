@@ -5,10 +5,10 @@ export default {
   logEnabled: true,
   hosts: {
     sso: 'acc.teko.vn',
-    offlinesales: 'test.offlinesales.teksvr.com',
+    offlinesales: 'test.teko.vn:8000',
     magento: 'moon.tekshop.vn',
     asia: 'dev.pvis.teko.vn',
-    stn: 'test.teksvr.com:8000'
+    stn: 'test.stn.teksvr.com'
   },
   firebase_config: {
     apiKey: 'AIzaSyBsRGTzAE6Fwt6zuD8xI5HQH2AXSR4WFXI',

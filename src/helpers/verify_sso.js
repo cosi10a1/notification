@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { setAuthenticatedUser } from '../stores/user/actions';
 import { syncFirebaseData } from '../stores/actions';
 import * as types from '../stores/user/action-types';
-import { userLogin as userLoginAction } from 'admin-on-rest';
+import { userLogin as userLoginAction,USER_CHECK_SUCCESS } from 'react-admin';
 
 export const verify_sso = (idToken, user) => {
   if (idToken) {
@@ -20,7 +20,11 @@ export const verify_sso = (idToken, user) => {
               localStorage.removeItem('idToken');
 
               dispatch(setAuthenticatedUser(user)).then(() => {
-                userLoginAction('', '', '');
+                console.log("Save uat:",result['accessToken'])
+                dispatch({
+                  type: USER_CHECK_SUCCESS,
+                  nill
+                });
                 dispatch(syncFirebaseData(user.uid));
               });
             }
