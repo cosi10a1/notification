@@ -2,8 +2,8 @@ import { date, name, internet, address, fake, random } from 'faker/locale/en';
 
 import { randomDate, weightedBoolean } from './utils';
 
-export default (db, { serializeDate }) =>
-  Array.from(Array(900).keys()).map(id => {
+export default (db, serializeDate) =>
+  Array.from(Array(90).keys()).map(id => {
     const app_id = randomDate();
     const created_at = randomDate();
     const message = random.words();

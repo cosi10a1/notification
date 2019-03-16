@@ -15,7 +15,6 @@ import notifications from '../notifications';
 import SubMenu from './SubMenu';
 import categories from '../categories';
 
-
 class Menu extends Component {
   constructor(props) {
     super(props);
@@ -38,14 +37,12 @@ class Menu extends Component {
           primaryText="Gửi Thông báo"
           leftIcon={<notifications.icon />}
         />
-         <MenuItemLink
-                        to={`/categories`}
-                        primaryText={translate(`resources.categories.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<categories.icon />}
-                        onClick={onMenuClick}
-         />
+        <MenuItemLink
+          to={`/categories`}
+          primaryText="categories"
+          leftIcon={<categories.icon />}
+          onClick={onMenuClick}
+        />
         <Responsive
           xsmall={
             <MenuItemLink

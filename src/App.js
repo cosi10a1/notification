@@ -19,6 +19,7 @@ import fakeServerFactory from './fakeServer';
 import { signOut } from './stores/user/actions';
 import { fetchEmployees } from './stores/employees/actions';
 import Logout from './layout/Logout';
+import categories from './categories';
 
 const i18nProvider = locale => {
   if (locale === 'fr') {
@@ -29,8 +30,6 @@ const i18nProvider = locale => {
   return englishMessages;
 };
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -39,14 +38,11 @@ class App extends Component {
     };
   }
 
-  async componentWillMount() {
-  }
+  async componentWillMount() {}
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   render() {
-
     return (
       <div className="app">
         {!this.props.user.check ? (
@@ -70,6 +66,7 @@ class App extends Component {
             history={this.props.history}
           >
             <Resource name="notifications" {...notifications} />
+            <Resource name="categories" {...categories} />
           </Admin>
         ) : (
           <Redirect from="/" to="/login" />
