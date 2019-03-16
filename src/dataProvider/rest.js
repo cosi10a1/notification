@@ -7,7 +7,6 @@ import { GET_LIST, CREATE } from 'ra-core';
 import cookie from 'react-cookies';
 import Base64 from 'base-64';
 
-
 const buildToken = (tokenType, token) => {
   return tokenType + ' ' + token;
 };
@@ -18,18 +17,24 @@ const buildClient = tokenType => (url, options = {}) => {
     authenticated: true,
     token: buildToken(tokenType, Base64.encode(token + ':' + ''))
   };
-  options.headers = new Headers({ Accept: 'application/json'});
+  options.headers = new Headers({
+    Accept: 'application/json',
+    'content-type': 'application/x-www-form-urlencoded'
+  });
   return fetchUtils.fetchJson(url, options);
 };
 
-const buildTekoUatClient=() =>(url,options={}) =>{
+const buildTekoUatClient = () => (url, options = {}) => {
   let token = cookie.load('_uat');
   options.user = {
-    authenticated: true,
+    authenticated: true
   };
-  options.headers = new Headers({ Accept: 'application/json', 'teko-uat':token });
+  options.headers = new Headers({
+    Accept: 'application/json',
+    'teko-uat': token
+  });
   return fetchUtils.fetchJson(url, options);
-}
+};
 
 const notificationProvider = simpleRestProvider(
   'http://' + config.hosts.offlinesales,
@@ -57,10 +62,9 @@ export default (type, resource, params) =>
             console.log('params', params);
             resolve(
               notificationProvider(CREATE, 'api/v2.1/users/notify/', {
-                x: 'y',
-                y: 'z'
-              }).then(result=>{
-                console.log("Create success")
+                params
+              }).then(result => {
+                console.log('Create success');
               })
             );
           case GET_LIST:
@@ -69,8 +73,8 @@ export default (type, resource, params) =>
               viewNotificationProvider(GET_LIST, 'api/notifications', {
                 app_id: 'nhanvien',
                 limit: 10
-              }).then(result=>{
-                console.log("Get result:", result)
+              }).then(result => {
+                console.log('Get result:', result);
               })
             );
           default:
@@ -79,20 +83,31 @@ export default (type, resource, params) =>
               500
             );
         }
+        break;
       case 'permission_groups':
         switch (type) {
           case GET_LIST:
-            console.log("permission_groups")
+            console.log('permission_groups1');
             resolve(
-              offlinesalesProvider(GET_LIST, 'api/v2.1/permission_groups/', { pagination: { page: 0 , perPage: 0 }, sort: { field: '', order: '' }, filter: {} })
+              offlinesalesProvider(
+                GET_LIST,
+                'api/v2.1/permission_groups/',
+                params
+              )
             );
           default:
-            setTimeout(
-              () => resolve(offlinesalesProvider(type, resource, params)),
-              500
+            resolve(
+              offlinesalesProvider(
+                GET_LIST,
+                'api/v2.1/permission_groups/',
+                params
+              )
             );
         }
+        break;
       default:
-        setTimeout(() => resolve(restProvider(type, resource, params)), 500);
+        resolve(
+          offlinesalesProvider(GET_LIST, 'api/v2.1/permission_groups/', params)
+        );
     }
   });

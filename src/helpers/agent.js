@@ -5,7 +5,7 @@ import cookie from 'react-cookies';
 import config from '../config';
 
 // const API_ROOT = `https://${config.hosts.offlinesales}/pvsales/detail_reports`;
-const API_ROOT = `https://${config.hosts.offlinesales}/api/v2.1`;
+const API_ROOT = `http://${config.hosts.offlinesales}/api/v2.1`;
 
 const REDASH_API_ROOT = `https://bi.teko.vn/api`;
 
@@ -47,6 +47,10 @@ var options = {
   method: 'get',
   contentType: 'application/json'
 };
+var optionsPOST = {
+  method: 'post',
+  contentType: 'application/json'
+};
 
 const reports = {
   get: (created_from, created_to, stores, query_by) =>
@@ -64,6 +68,17 @@ const reports = {
       `/bipvreports/by-store/?created_from=${created_from}&created_to=${created_to}&stores=${stores}`,
       options
     )
+};
+
+const notifications = {
+  create: (sender, sender_id, link, received_id, message, title, app_id) =>
+    requests.post(
+      `/users/notify/?sender=${sender}&sender_id=${sender_id}&link=${link}&message=${message}&received_id=${received_id}&title=${title}&app_id=${app_id}`,
+      optionsPOST
+    ),
+  get_groups: () => requests.get(`/permission_groups/`, options),
+  get_users_by_groups: query =>
+    requests.get(`/permission_groups/users/` + query, options)
 };
 
 const requests = {
@@ -119,6 +134,7 @@ const redash_requests = {
 
 export default {
   reports,
+  notifications,
   redash_token,
   redash_requests,
   setToken: _token => {

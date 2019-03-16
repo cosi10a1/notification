@@ -40,27 +40,12 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    // this.restoreFetch = await fakeServerFactory('rest');
-
-    // const dataProvider = await dataProviderFactory('rest');
-
-    // this.setState({ dataProvider });
   }
 
   componentWillUnmount() {
-    // this.restoreFetch();
   }
 
   render() {
-    // const { dataProvider } = this.state;
-
-    // if (!dataProvider) {
-    //   return (
-    //     <div className="loader-container">
-    //       <div className="loader">Loading...</div>
-    //     </div>
-    //   );
-    // }
 
     return (
       <div className="app">
