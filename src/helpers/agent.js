@@ -3,9 +3,12 @@ import _superagent from 'superagent';
 import Base64 from 'base-64';
 import cookie from 'react-cookies';
 import config from '../config';
+import { request } from 'https';
 
 // const API_ROOT = `https://${config.hosts.offlinesales}/pvsales/detail_reports`;
 const API_ROOT = `http://${config.hosts.offlinesales}/api/v2.1`;
+const STN_ROOT = `http://${config.hosts.stn}/api/notifications`;
+
 
 const REDASH_API_ROOT = `https://bi.teko.vn/api`;
 
@@ -17,17 +20,11 @@ const responseBody = res => res.body;
 let token = null;
 let redash_token = 'j0LDWzzQI6NvT0llIid8GN4LKwx8fLc6WeGvka7e';
 const tokenPlugin = req => {
-  // if (token) {
   req.set('Authorization', genAuthorization());
-
-  // }
 };
 
 const redashTokenPlugin = req => {
-  // if (token) {
   req.set('Authorization', `Key ${redash_token}`);
-
-  // }
 };
 
 const genAuthorization = () => {
@@ -35,14 +32,6 @@ const genAuthorization = () => {
   return 'Basic ' + Base64.encode(accessToken + ':' + '');
 };
 
-const genRedashAuthorization = () => {
-  return;
-  return 'Basic ' + Base64.encode(accessToken + ':' + '');
-};
-// var headers={
-//   "Authorization":genAuthorization()
-// }
-//  Logger.log(payload)
 var options = {
   method: 'get',
   contentType: 'application/json'
@@ -78,8 +67,16 @@ const notifications = {
     ),
   get_groups: () => requests.get(`/permission_groups/`, options),
   get_users_by_groups: query =>
-    requests.get(`/permission_groups/users/` + query, options)
+    requests.get(`/permission_groups/users/` + query, options),
+  get_user_notifications:(app_id,check_point) => {
+    if (check_point!=null){
+      return requests.get(`/users/get_notifications/?app_id=${app_id}&check_point=${check_point}`,options)
+    }else{
+      return requests.get(`/users/get_notifications/?app_id=${app_id}`,options)
+    }
+  }
 };
+
 
 const requests = {
   del: url =>

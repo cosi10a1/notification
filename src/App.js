@@ -66,7 +66,6 @@ class App extends Component {
             history={this.props.history}
           >
             <Resource name="notifications" {...notifications} />
-            <Resource name="categories" {...categories} />
           </Admin>
         ) : (
           <Redirect from="/" to="/login" />

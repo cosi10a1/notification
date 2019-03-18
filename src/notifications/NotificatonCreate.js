@@ -8,6 +8,7 @@ import {
   SelectInput,
   Toolbar,
   GET_LIST,
+  showNotification,
   SelectArrayInput
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -56,7 +57,7 @@ class NotificatonCreate extends Component {
   render() {
     let { classes, ...rest } = this.props;
     return (
-      <Create {...rest}>
+      <Create {...rest} title="Gửi thông báo">
         <TabbedForm toolbar={<NotificationCreateToolbar />}>
           <FormTab label="Thông báo">
             <TextInput

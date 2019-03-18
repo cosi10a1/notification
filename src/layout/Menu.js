@@ -37,12 +37,12 @@ class Menu extends Component {
           primaryText="Gửi Thông báo"
           leftIcon={<notifications.icon />}
         />
-        <MenuItemLink
+        {/* <MenuItemLink
           to={`/categories`}
-          primaryText="categories"
+          primaryText="Danh mục"
           leftIcon={<categories.icon />}
           onClick={onMenuClick}
-        />
+        /> */}
         <Responsive
           xsmall={
             <MenuItemLink

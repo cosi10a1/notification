@@ -5,7 +5,7 @@ export default {
   logEnabled: true,
   hosts: {
     sso: 'acc.teko.vn',
-    offlinesales: 'test.teksvr.com:8000',
+    offlinesales: 'test.teko.vn:8000',
     magento: 'moon.tekshop.vn',
     asia: 'dev.pvis.teko.vn',
     stn: 'test.stn.teksvr.com'
