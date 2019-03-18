@@ -11,10 +11,11 @@ export default {
     stn: 'test.stn.teksvr.com'
   },
   firebase_config: {
-    apiKey: 'AIzaSyBsRGTzAE6Fwt6zuD8xI5HQH2AXSR4WFXI',
-    authDomain: 'pos-test.phongvu.vn',
-    databaseURL: 'https://nhan-vien-phong-vu-test.firebaseio.com',
-    projectId: 'nhan-vien-phong-vu-test',
-    storageBucket: 'nhan-vien-phong-vu-test.appspot.com'
+    apiKey: 'AIzaSyDzjeugNQtHRwaf8sJalJt3_jUz1e3-dFs',
+    authDomain: 'dai-ly-phong-vu-dev.firebaseapp.com',
+    databaseURL: 'https://dai-ly-phong-vu-dev.firebaseio.com',
+    projectId: 'dai-ly-phong-vu-dev',
+    storageBucket: 'dai-ly-phong-vu-dev.appspot.com',
+    messagingSenderId: '830409295041'
   }
 };

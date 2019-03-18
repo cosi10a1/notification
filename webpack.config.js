@@ -26,7 +26,7 @@ module.exports = (env = {}) => {
     // watch: true,
     devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
-      host: 'nhan-vien-phong-vu-web-app.phongvu.vn',
+      host: 'agent-admin-dev.phongvu.vn',
       contentBase: BUILD_DIR,
       //   port: 9001,
       compress: true,
@@ -46,7 +46,7 @@ module.exports = (env = {}) => {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              presets: ['es2015','react', ['env', { modules: false }]]
+              presets: ['es2015', 'react', ['env', { modules: false }]]
             }
           }
         },

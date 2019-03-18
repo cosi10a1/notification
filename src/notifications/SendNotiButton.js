@@ -49,7 +49,7 @@ class SenNotiButton extends Component {
         if (i == 0) {
           query += 'group_names=' + groups[i];
         } else {
-          query += '&group_names' + groups[i];
+          query += '&group_names=' + groups[i];
         }
       }
     }

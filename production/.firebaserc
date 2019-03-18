@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "nhan-vien-phong-vu",
-    "test": "nhan-vien-phong-vu-test"
+    "default": "dai-ly-phong-vu-dev",
+    "test": "dai-ly-phong-vu-dev"
   }
 }
