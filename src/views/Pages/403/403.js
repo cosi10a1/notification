@@ -18,7 +18,12 @@ import {
   Button,
   Jumbotron
 } from 'reactstrap';
+import { throttle } from 'redux-saga/effects';
 export default class Page403 extends Component {
+  constructor(props){
+    super(props)
+  }
+
   render() {
     return (
       <div
@@ -29,10 +34,10 @@ export default class Page403 extends Component {
           <div className="col col-lg-8 text-center">
             <Jumbotron style={{ background: '#ffffff' }}>
               <div className="logo">
-                <h1>403 Forbiden</h1>
+                <h1>{this.props.pageTitle}</h1>
               </div>
               <p className="lead text-muted">
-                Bạn không có quyền truy cập vào trang này.
+                {this.props.pageContent}
               </p>
               <img
                 src={'img/forbiden.svg'}
