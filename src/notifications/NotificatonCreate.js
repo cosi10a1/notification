@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import {
   Create,
   FormTab,
-  LongTextInput,
   TabbedForm,
   TextInput,
   SelectInput,
   Toolbar,
   GET_LIST,
   showNotification,
-  SelectArrayInput
+  SelectArrayInput,
+  LongTextInput
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -66,7 +66,7 @@ class NotificatonCreate extends Component {
               source="title"
               formClassName={classes.title}
             />
-            <RichTextInput
+            <LongTextInput
               label="Nội dung"
               source="message"
               source="message"

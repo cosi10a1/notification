@@ -13,7 +13,6 @@ import {
 
 import notifications from '../notifications';
 import SubMenu from './SubMenu';
-import categories from '../categories';
 
 class Menu extends Component {
   constructor(props) {

@@ -5,6 +5,6 @@ import { CreateButton } from 'ra-ui-materialui/lib/button';
 
 export const NotificationListActions = ({ basePath, data, resource }) => (
     <CardActions>
-        <CreateButton basePath="notifications"/>
+        <CreateButton label="Gửi thông báo"  basePath="notifications" />
     </CardActions>
 );

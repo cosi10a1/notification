@@ -5,17 +5,17 @@ export default {
   logEnabled: true,
   hosts: {
     sso: 'acc.teko.vn',
-    offlinesales: 'qc.offlinesales.teksvr.com',
+    offlinesales: 'offlinesales-qc.teko.vn',
     magento: 'moon.tekshop.vn',
     asia: 'qc.pvis.teko.vn',
     stn: 'test.stn.teksvr.com'
   },
   firebase_config: {
-    apiKey: 'AIzaSyDzjeugNQtHRwaf8sJalJt3_jUz1e3-dFs',
-    authDomain: 'dai-ly-phong-vu-dev.firebaseapp.com',
-    databaseURL: 'https://dai-ly-phong-vu-dev.firebaseio.com',
-    projectId: 'dai-ly-phong-vu-dev',
-    storageBucket: 'dai-ly-phong-vu-dev.appspot.com',
-    messagingSenderId: '830409295041'
+    apiKey: "AIzaSyBIt5Z0h5MfiZDLFYLZZOIAKH9K_ilxGsc",
+    authDomain: "dai-ly-phong-vu-test.firebaseapp.com",
+    databaseURL: "https://dai-ly-phong-vu-test.firebaseio.com",
+    projectId: "dai-ly-phong-vu-test",
+    storageBucket: "dai-ly-phong-vu-test.appspot.com",
+    messagingSenderId: "627934713724"
   }
 };

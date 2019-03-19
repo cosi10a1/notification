@@ -1,8 +1,9 @@
 import React from 'react';
-import { AppBar, UserMenu, MenuItemLink, translate } from 'react-admin';
+import { AppBar, UserMenu, MenuItemLink, translate, MenuItem } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles } from '@material-ui/core/styles';
+import config from '../config'
 
 import Logo from './Logo';
 
@@ -15,6 +16,9 @@ const styles = {
   },
   spacer: {
     flex: 1
+  },
+  version:{
+    float:"right"
   }
 };
 
@@ -36,7 +40,6 @@ const CustomAppBar = ({ classes, ...props }) => (
       className={classes.title}
       id="react-admin-title"
     />
-    <Logo />
     <span className={classes.spacer} />
   </AppBar>
 );

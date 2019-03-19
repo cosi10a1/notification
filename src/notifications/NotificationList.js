@@ -117,19 +117,15 @@ class NotificationList extends Component {
 
   handleChangePage(event, page) {
     this.setState({ page },()=>{
-      console.log("handleChangePage:",this.state.page)
     });
   };
 
   handleChangeRowsPerPage(event){
     this.setState({ rowsPerPage: event.target.value },()=>{
-      console.log("handleChangeRowsPerPage:",this.state.rowsPerPage)
     });
   };
 
   render() {
-    console.log("handleChangePage:",this.state.rowsPerPage,this.state.page)
-    console.log("data",this.state.notifications)
     return (
       <Create
         {...this.props}

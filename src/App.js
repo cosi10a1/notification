@@ -19,7 +19,6 @@ import fakeServerFactory from './fakeServer';
 import { signOut } from './stores/user/actions';
 import { fetchEmployees } from './stores/employees/actions';
 import Logout from './layout/Logout';
-import categories from './categories';
 
 const i18nProvider = locale => {
   if (locale === 'fr') {

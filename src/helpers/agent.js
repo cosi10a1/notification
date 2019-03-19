@@ -6,7 +6,7 @@ import config from '../config';
 import { request } from 'https';
 
 // const API_ROOT = `https://${config.hosts.offlinesales}/pvsales/detail_reports`;
-const API_ROOT = `http://${config.hosts.offlinesales}/api/v2.1`;
+const API_ROOT = `https://${config.hosts.offlinesales}/api/v2.1`;
 const STN_ROOT = `http://${config.hosts.stn}/api/notifications`;
 
 
