@@ -1,9 +1,5 @@
-import { showNotification, SaveButton, withDataProvider } from 'react-admin';
-import { push } from 'react-router-redux';
-import { Save } from 'material-ui-icons';
+import { showNotification, SaveButton } from 'react-admin';
 import React, { Component } from 'react';
-import { CREATE } from 'ra-core';
-import dataProvider from '../dataProvider/rest';
 import agent from '../helpers/agent';
 import { connect } from 'react-redux';
 
@@ -12,6 +8,9 @@ class SenNotiButton extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.sendNotification = this.sendNotification.bind(this);
+    this.state = {
+      loading:false
+    }
   }
 
   sendNotification(
@@ -27,19 +26,24 @@ class SenNotiButton extends Component {
       .create(sender, sender_id, link, received_id, message, title, app_id)
       .then(result => {
         if (result.status == 'error') {
+          this.props.dispatch(hideNotification());
           this.props.dispatch(
             showNotification('Lỗi gửi thông báo: ' + result.message),
             'error'
           );
         } else {
+          this.props.dispatch(hideNotification());
           this.props.dispatch(showNotification('Thông báo được gửi'));
         }
+        this.setState({loading:false})
       })
       .catch(e => {
+        this.props.dispatch(hideNotification());
         this.props.dispatch(
           showNotification('Lỗi: không thể gửi thông báo: ' + e, 'error')
         );
-      });
+        this.setState({loading:false})
+      })
   }
 
   getUserByGroups(groups) {
@@ -65,29 +69,36 @@ class SenNotiButton extends Component {
     let additional_user = fieldValues.additional_user
       ? fieldValues.additional_user
       : '';
-    // let received_id = fieldValues.received_id
-    //   ? fieldValues.received_id
-    //   : '50135';
+    additional_user = additional_user.replace(',,',',').trim()
     let groups = fieldValues.groups ? fieldValues.groups : [];
     let message = fieldValues.message ? fieldValues.message : '';
     let title = fieldValues.title ? fieldValues.title : '';
     let app_id = fieldValues.app_id ? fieldValues.app_id : '';
     this.getUserByGroups(groups).then(response => {
+      this.setState({loading:true},()=>{
+        this.props.dispatch(
+          showNotification('Đang tiến hành gửi thông báo ...'),
+          'info'
+        );
+      })
       let users = response.users.join();
       this.sendNotification(
         sender,
         sender_id,
         link,
-        users + ',' + additional_user,
+        (users + ',' + additional_user).replace(',,',',').trim(),
         message,
         title,
         app_id
       );
+    }).catch(ex=>{
+      this.setState({loading:false})
     });
   }
 
   render() {
-    return <SaveButton label="Gửi thông báo" onClick={this.handleClick} />;
+    console.log(this.state.loading)
+    return <SaveButton disabled={this.state.loading} label="Gửi thông báo" onClick={this.handleClick} />;
   }
 }
 

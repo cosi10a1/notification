@@ -16,12 +16,7 @@ import {
   showNotification
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
-import genNotifications from '../data-generator/src/notifications';
-import RawList from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -91,7 +86,6 @@ class NotificationList extends Component {
           'error'
         );
       }else{
-        console.log("result x:",result.data)
         this.setState({
           notifications:result.data.notifications,
           check_points:[...this.state.check_points,result.data.check_point]
@@ -110,7 +104,6 @@ class NotificationList extends Component {
   }
   componentDidUpdate(prevProps, prevState, snapshot){
     if (prevState.page!= this.state.page){
-      console.log("componentDidUpdate:",this.state.page, prevState.page)
       this.fetchNotification(false)
     }
   }
@@ -187,7 +180,7 @@ class NotificationList extends Component {
               nextIconButtonProps={{disabled:false}}
                 rowsPerPageOptions={[]}
                 component="div"
-                count={100}
+                count={1000}
                 rowsPerPage={this.state.rowsPerPage}
                 page={this.state.page}
                 labelDisplayedRows={({ from, to, count }) => ""}

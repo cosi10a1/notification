@@ -5,15 +5,11 @@ import {
   TabbedForm,
   TextInput,
   SelectInput,
-  Toolbar,
-  GET_LIST,
-  showNotification,
   SelectArrayInput,
   LongTextInput
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import RichTextInput from 'ra-input-rich-text';
 import NotificationCreateToolbar from './NotificationCreateToolBar';
 
 import dataProvider from '../dataProvider/rest';
@@ -60,6 +56,29 @@ class NotificatonCreate extends Component {
       <Create {...rest} title="Gửi thông báo">
         <TabbedForm toolbar={<NotificationCreateToolbar />}>
           <FormTab label="Thông báo">
+          <TextInput
+              label="Sender"
+              source="sender"
+              formClassName={classes.sender}
+              defaultValue="offline_sales"
+            />
+            <TextInput
+              label="Sender_ID"
+              source="sender_id"
+              formClassName={classes.sender_id}
+              defaultValue="offline_sales"
+            />
+            <LongTextInput source="link" formClassName={classes.link} />
+            <SelectInput
+              label="Gửi tới app"
+              source="app_id"
+              choices={[
+                { id: 'dailymoi', name: 'App Đại lý mới' },
+                { id: 'daily', name: 'App Đại lý' },
+                { id: 'nhanvien', name: 'App Nhân viên' }
+              ]}
+              defaultValue="dailymoi"
+            />
             <TextInput
               autoFocus
               label="Tiêu đề"
@@ -91,31 +110,6 @@ class NotificatonCreate extends Component {
               label="Danh sách người cần gửi thêm"
               source="additional_user"
               formClassName={classes.title}
-            />
-          </FormTab>
-          <FormTab label="Cấu hình thông báo">
-            <TextInput
-              label="Sender"
-              source="sender"
-              formClassName={classes.sender}
-              defaultValue="offline_sales"
-            />
-            <TextInput
-              label="Sender_ID"
-              source="sender_id"
-              formClassName={classes.sender_id}
-              defaultValue="offline_sales"
-            />
-            <LongTextInput source="link" formClassName={classes.link} />
-            <SelectInput
-              label="Gửi tới app"
-              source="app_id"
-              choices={[
-                { id: 'dailymoi', name: 'App Đại lý mới' },
-                { id: 'daily', name: 'App Đại lý' },
-                { id: 'nhanvien', name: 'App Nhân viên' }
-              ]}
-              defaultValue="dailymoi"
             />
           </FormTab>
         </TabbedForm>
